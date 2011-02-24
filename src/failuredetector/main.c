@@ -37,5 +37,7 @@ int main() {
 	printf("Should ping at 70: %u\n", fd->should_ping(fd, "objectA", 70));
 	printf("Should ping at 90: %u\n", fd->should_ping(fd, "objectA", 90));
 
+	fd->release_monitored(fd, "objectA");
+
 	return 0;
 }
