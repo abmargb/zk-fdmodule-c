@@ -18,7 +18,7 @@
 
 #include "fixed_failuredetector.h"
 #include "failuredetector.h"
-#include "hashtable.h"
+#include "fd_hashtable.h"
 #include "../hashtable/hashtable.h"
 
 #include <stdio.h>

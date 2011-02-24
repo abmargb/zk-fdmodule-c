@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+#ifndef CHEN_FAILUREDETECTOR_H_
+#define CHEN_FAILUREDETECTOR_H_
 #include "failuredetector.h"
 
 typedef struct {
@@ -24,3 +26,5 @@ typedef struct {
 } chenfd_t;
 
 chenfd_t* chenfd_init();
+
+#endif /* CHEN_FAILUREDETECTOR_H_ */

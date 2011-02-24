@@ -16,10 +16,23 @@
  * limitations under the License.
  */
 
-#ifndef FAILUREDETECTOR_FACTORY_H_
-#define FAILUREDETECTOR_FACTORY_H_
-#include "failuredetector.h"
+#include "../hashtable/hashtable.h"
+#include <string.h>
 
-fdetector_t* create_failure_detector(char *fd_name);
+static unsigned int string_hash_djb2(void *str) {
+    unsigned int hash = 5381;
+    int c;
 
-#endif /* FAILUREDETECTOR_FACTORY_H_ */
+    while ((c = *(const char*)str++))
+        hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+
+    return hash;
+}
+
+static int string_equal(void *key1,void *key2) {
+    return strcmp((const char*)key1,(const char*)key2)==0;
+}
+
+struct hashtable* create_fd_hashtable() {
+	return create_hashtable(32,string_hash_djb2,string_equal);
+}

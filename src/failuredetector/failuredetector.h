@@ -16,8 +16,8 @@
  * limitations under the License.
  */
 
-#ifndef FAILUREDETECTOR_H
-#define FAILUREDETECTOR_H
+#ifndef FAILUREDETECTOR_H_
+#define FAILUREDETECTOR_H_
 
 #include <sys/time.h>
 #define APPLICATION 0
@@ -37,4 +37,4 @@ typedef struct fdetector {
 	long (*get_timeout)(void *this, char *id);
 } fdetector_t;
 
-#endif
+#endif /* FAILUREDETECTOR_H_ */

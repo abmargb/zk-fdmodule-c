@@ -16,10 +16,9 @@
  * limitations under the License.
  */
 
-#ifndef FAILUREDETECTOR_FACTORY_H_
-#define FAILUREDETECTOR_FACTORY_H_
-#include "failuredetector.h"
+#ifndef FD_HASHTABLE_H_
+#define FD_HASHTABLE_H_
 
-fdetector_t* create_failure_detector(char *fd_name);
+struct hashtable* create_fd_hashtable();
 
-#endif /* FAILUREDETECTOR_FACTORY_H_ */
+#endif /* FD_HASHTABLE_H_ */

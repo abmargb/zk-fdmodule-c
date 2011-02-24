@@ -16,6 +16,9 @@
  * limitations under the License.
  */
 
+#ifndef FIXED_FAILUREDETECTOR_H_
+#define FIXED_FAILUREDETECTOR_H_
+
 #include "failuredetector.h"
 
 typedef struct {
@@ -24,3 +27,5 @@ typedef struct {
 } fixedfd_t;
 
 fixedfd_t* fixedfd_init();
+
+#endif /* FIXED_FAILUREDETECTOR_H_ */
