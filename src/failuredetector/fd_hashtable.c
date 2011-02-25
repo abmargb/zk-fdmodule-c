@@ -39,7 +39,5 @@ struct hashtable* create_fd_hashtable() {
 }
 
 void fd_hashtable_insert(struct hashtable *hashtable, char *key, void *value) {
-	char *key_copy = malloc(sizeof(key));
-	strcpy(key_copy, key);
-	hashtable_insert(hashtable, key_copy, value);
+	hashtable_insert(hashtable, strdup(key), value);
 }
