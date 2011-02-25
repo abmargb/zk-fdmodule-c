@@ -19,12 +19,16 @@
 #include "failuredetector.h"
 #include "failuredetector_factory.h"
 #include "fixed_failuredetector.h"
+#include "chen_failuredetector.h"
 #include <string.h>
 
 fdetector_t* create_failure_detector(char *fd_name) {
 
 	if (strcmp(fd_name, "fixed") == 0) {
 		return (fdetector_t*)fixedfd_init();
+	}
+	if (strcmp(fd_name, "chen") == 0) {
+		return (fdetector_t*)chenfd_init();
 	}
 
 	return 0;

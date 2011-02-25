@@ -42,6 +42,7 @@ void update_mean(interarrival_window_t* window, window_el_t *added,
 void add_interarrival(interarrival_window_t* window, long interarrival) {
 	window_el_t *window_el;
 	window_el = calloc(1, sizeof(*window_el));
+	window_el->interarrival = interarrival;
 
 	if (!window->head) {
 		window->head = window_el;
@@ -51,7 +52,7 @@ void add_interarrival(interarrival_window_t* window, long interarrival) {
 	}
 	window->size++;
 
-	window_el_t *removed;
+	window_el_t *removed = NULL;
 	if (window->size > MAX_SIZE) {
 		removed = window->head;
 		window->head = removed->next;
@@ -61,6 +62,19 @@ void add_interarrival(interarrival_window_t* window, long interarrival) {
 	update_mean(window, window_el, removed);
 
 	free(removed);
+}
+
+void destroy_el(window_el_t *el) {
+	if (el) {
+		window_el_t *next = el->next;
+		free(el);
+		destroy_el(next);
+	}
+}
+
+void destroy_window(interarrival_window_t *window) {
+	destroy_el(window->head);
+	free(window);
 }
 
 void add_ping(interarrival_window_t* window, long ping) {

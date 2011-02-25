@@ -28,11 +28,13 @@ typedef struct window_el {
 typedef struct {
 	int size;
 	float mean;
+	long last_ping;
 	window_el_t* head;
 	window_el_t* tail;
-	long last_ping;
 } interarrival_window_t;
 
+interarrival_window_t* init_window();
 void add_ping(interarrival_window_t *window, long ping);
+void destroy_window(interarrival_window_t *window);
 
 #endif /* INTERARRIVAL_WINDOW_H_ */

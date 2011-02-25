@@ -23,6 +23,7 @@
 typedef struct {
 	fdetector_t fdetector;
 	struct hashtable *monitoreds;
+	long alpha;
 } chenfd_t;
 
 chenfd_t* chenfd_init();

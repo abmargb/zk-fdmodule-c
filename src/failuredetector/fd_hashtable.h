@@ -19,6 +19,10 @@
 #ifndef FD_HASHTABLE_H_
 #define FD_HASHTABLE_H_
 
+#include "../hashtable/hashtable.h"
+
 struct hashtable* create_fd_hashtable();
+
+void fd_hashtable_insert(struct hashtable *hashtable, char *key, void *value);
 
 #endif /* FD_HASHTABLE_H_ */

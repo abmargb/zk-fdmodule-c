@@ -18,6 +18,7 @@
 
 #include "../hashtable/hashtable.h"
 #include <string.h>
+#include <stdlib.h>
 
 static unsigned int string_hash_djb2(void *str) {
     unsigned int hash = 5381;
@@ -35,4 +36,10 @@ static int string_equal(void *key1,void *key2) {
 
 struct hashtable* create_fd_hashtable() {
 	return create_hashtable(32,string_hash_djb2,string_equal);
+}
+
+void fd_hashtable_insert(struct hashtable *hashtable, char *key, void *value) {
+	char *key_copy = malloc(sizeof(key));
+	strcpy(key_copy, key);
+	hashtable_insert(hashtable, key_copy, value);
 }

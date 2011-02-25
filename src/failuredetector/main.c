@@ -24,20 +24,25 @@
 
 int main() {
 
-	fdetector_t* fd = create_failure_detector("fixed");
+	fdetector_t* fd = create_failure_detector("chen");
 
-	fd->register_monitored(fd, "objectA", 0, 100);
-	fd->message_received(fd, "objectA", 20, PING);
-	fd->message_sent(fd, "objectA", 30, PING);
+	char* monitoredName = "object";
 
-	printf("Timeout: %ld\n", fd->get_timeout(fd, "objectA"));
-	printf("Failed at 110: %u\n", fd->is_failed(fd, "objectA", 110));
-	printf("Failed at 130: %u\n", fd->is_failed(fd, "objectA", 130));
-	printf("Time to next ping at 40: %ld\n", fd->get_time_to_next_ping(fd, "objectA", 40));
-	printf("Should ping at 70: %u\n", fd->should_ping(fd, "objectA", 70));
-	printf("Should ping at 90: %u\n", fd->should_ping(fd, "objectA", 90));
+	fd->register_monitored(fd, monitoredName, 0l, 100);
+	fd->message_received(fd, monitoredName, 20l, PING);
+	fd->message_received(fd, monitoredName, 40l, PING);
+	fd->message_received(fd, monitoredName, 50l, PING);
 
-	fd->release_monitored(fd, "objectA");
+	fd->message_sent(fd, monitoredName, 30l, PING);
+
+	printf("Timeout: %ld\n", fd->get_timeout(fd, monitoredName));
+	printf("Failed at 110: %u\n", fd->is_failed(fd, monitoredName, 110l));
+	printf("Failed at 130: %u\n", fd->is_failed(fd, monitoredName, 130l));
+	printf("Time to next ping at 40: %ld\n", fd->get_time_to_next_ping(fd, monitoredName, 40l));
+	printf("Should ping at 70: %u\n", fd->should_ping(fd, monitoredName, 70l));
+	printf("Should ping at 90: %u\n", fd->should_ping(fd, monitoredName, 90l));
+
+	fd->release_monitored(fd, monitoredName);
 
 	return 0;
 }
