@@ -22,7 +22,6 @@
 #include "../hashtable/hashtable.h"
 #include "interarrival_window.h"
 
-#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
@@ -38,7 +37,7 @@ typedef struct {
 
 } monitored_t;
 
-void destroy_monitored(monitored_t *m) {
+static void destroy_monitored(monitored_t *m) {
 	destroy_window(m->sampling_window);
 	free(m);
 }
@@ -67,9 +66,9 @@ long chen_get_to(chenfd_t *this, char *id) {
 	return m->timeout;
 }
 
-void update_timeout(chenfd_t *this, monitored_t* m, long now) {
+static void update_timeout(chenfd_t *this, monitored_t* m, long now) {
 	if (m->sampling_window->size > 0) {
-		float ea = now + m->sampling_window->mean;
+		double ea = now + m->sampling_window->mean;
 		long t = (long)ea + this->alpha;
 		m->timeout = t - now;
 	}

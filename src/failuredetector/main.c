@@ -24,7 +24,7 @@
 
 int main() {
 
-	fdetector_t* fd = create_failure_detector("chen");
+	fdetector_t* fd = create_failure_detector("bertier");
 
 	char* monitoredName = "object";
 

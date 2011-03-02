@@ -27,7 +27,7 @@ typedef struct window_el {
 
 typedef struct {
 	int size;
-	float mean;
+	double mean;
 	long last_ping;
 	window_el_t* head;
 	window_el_t* tail;

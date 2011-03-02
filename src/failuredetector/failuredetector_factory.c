@@ -20,6 +20,7 @@
 #include "failuredetector_factory.h"
 #include "fixed_failuredetector.h"
 #include "chen_failuredetector.h"
+#include "bertier_failuredetector.h"
 #include <string.h>
 
 fdetector_t* create_failure_detector(char *fd_name) {
@@ -29,6 +30,9 @@ fdetector_t* create_failure_detector(char *fd_name) {
 	}
 	if (strcmp(fd_name, "chen") == 0) {
 		return (fdetector_t*)chenfd_init();
+	}
+	if (strcmp(fd_name, "bertier") == 0) {
+		return (fdetector_t*)bertierfd_init();
 	}
 
 	return 0;
