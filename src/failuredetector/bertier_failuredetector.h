@@ -29,6 +29,6 @@ typedef struct {
 	long moderation_step;
 } bertierfd_t;
 
-bertierfd_t* bertierfd_init();
+bertierfd_t* bertierfd_init(struct hashtable *params_table);
 
 #endif /* BERTIER_FAILUREDETECTOR_H_ */

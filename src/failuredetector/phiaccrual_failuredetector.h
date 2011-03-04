@@ -16,16 +16,17 @@
  * limitations under the License.
  */
 
-#ifndef CHEN_FAILUREDETECTOR_H_
-#define CHEN_FAILUREDETECTOR_H_
+#ifndef PHIACCRUAL_FAILUREDETECTOR_H_
+#define PHIACCRUAL_FAILUREDETECTOR_H_
 #include "failuredetector.h"
 
 typedef struct {
 	fdetector_t fdetector;
 	struct hashtable *monitoreds;
-	long alpha;
-} chenfd_t;
+	double threshold;
+	int min_window_size;
+} phiaccrualfd_t;
 
-chenfd_t* chenfd_init(struct hashtable *params_table);
+phiaccrualfd_t* phiaccrualfd_init(struct hashtable *params_table);
 
-#endif /* CHEN_FAILUREDETECTOR_H_ */
+#endif /* PHIACCRUAL_FAILUREDETECTOR_H_ */

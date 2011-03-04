@@ -21,18 +21,24 @@
 #include "fixed_failuredetector.h"
 #include "chen_failuredetector.h"
 #include "bertier_failuredetector.h"
+#include "phiaccrual_failuredetector.h"
+
 #include <string.h>
 
-fdetector_t* create_failure_detector(char *fd_name) {
+fdetector_t* create_failure_detector(char *fd_name, struct hashtable *params_table) {
 
 	if (strcmp(fd_name, "fixed") == 0) {
 		return (fdetector_t*)fixedfd_init();
 	}
 	if (strcmp(fd_name, "chen") == 0) {
-		return (fdetector_t*)chenfd_init();
+		return (fdetector_t*)chenfd_init(params_table);
 	}
 	if (strcmp(fd_name, "bertier") == 0) {
-		return (fdetector_t*)bertierfd_init();
+		return (fdetector_t*)bertierfd_init(params_table);
+	}
+
+	if (strcmp(fd_name, "phiaccrual") == 0) {
+		return (fdetector_t*)phiaccrualfd_init(params_table);
 	}
 
 	return 0;

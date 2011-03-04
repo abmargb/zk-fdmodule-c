@@ -16,12 +16,13 @@
  * limitations under the License.
  */
 
-#ifndef FAILUREDETECTOR_FACTORY_H_
-#define FAILUREDETECTOR_FACTORY_H_
+#ifndef FD_OPT_PARSER_H_
+#define FD_OPT_PARSER_H_
 
-#include "failuredetector.h"
-#include "../hashtable/hashtable.h"
+double parse_double(double def_value, char *prop_value);
 
-fdetector_t* create_failure_detector(char *fd_name, struct hashtable *params_table);
+int parse_int(int def_value, char *prop_value);
 
-#endif /* FAILUREDETECTOR_FACTORY_H_ */
+long parse_long(long def_value, char *prop_value);
+
+#endif /* FD_OPT_PARSER_H_ */

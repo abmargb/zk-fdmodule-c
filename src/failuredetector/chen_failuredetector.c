@@ -21,6 +21,7 @@
 #include "fd_hashtable.h"
 #include "../hashtable/hashtable.h"
 #include "interarrival_window.h"
+#include "fd_opt_parser.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -119,7 +120,7 @@ void chen_set_ping_interval(chenfd_t *this, char *id, long interval) {
 	m->eta = interval;
 }
 
-chenfd_t* chenfd_init() {
+chenfd_t* chenfd_init_params(long alpha) {
 	chenfd_t *p_fd;
 	p_fd = calloc(1, sizeof(*p_fd));
 
@@ -136,12 +137,15 @@ chenfd_t* chenfd_init() {
 	p_fd->fdetector.set_ping_interval = (void*)chen_set_ping_interval;
 
 	p_fd->monitoreds = create_fd_hashtable();
-	p_fd->alpha = DEF_ALPHA;
+	p_fd->alpha = alpha;
 	return p_fd;
 }
 
-chenfd_t* chenfd_init_params(long alpha) {
-	chenfd_t *p_fd = chenfd_init();
-	p_fd->alpha = alpha;
-	return p_fd;
+chenfd_t* chenfd_init(struct hashtable *params_table) {
+	return chenfd_init_params(
+			parse_long(DEF_ALPHA, (char*) hashtable_search(params_table, "alpha")));
+}
+
+chenfd_t* chenfd_init_def() {
+	return chenfd_init_params(DEF_ALPHA);
 }

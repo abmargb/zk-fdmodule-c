@@ -19,6 +19,7 @@
 #include "bertier_failuredetector.h"
 #include "failuredetector.h"
 #include "fd_hashtable.h"
+#include "fd_opt_parser.h"
 #include "../hashtable/hashtable.h"
 #include "interarrival_window.h"
 
@@ -145,7 +146,8 @@ void bertier_set_ping_interval(bertierfd_t *this, char *id, long interval) {
 	m->eta = interval;
 }
 
-bertierfd_t* bertierfd_init() {
+bertierfd_t* bertierfd_init_params(double gamma, double beta,
+		double phi, long moderation_step) {
 	bertierfd_t *p_fd;
 	p_fd = calloc(1, sizeof(*p_fd));
 
@@ -162,18 +164,21 @@ bertierfd_t* bertierfd_init() {
 	p_fd->fdetector.set_ping_interval = (void*)bertier_set_ping_interval;
 
 	p_fd->monitoreds = create_fd_hashtable();
-	p_fd->phi = DEF_PHI;
-	p_fd->beta = DEF_BETA;
-	p_fd->gamma = DEF_GAMMA;
-	p_fd->moderation_step = DEF_MOD_STEP;
-	return p_fd;
-}
-
-bertierfd_t* bertierfd_init_params(float gamma, float beta, float phi, long moderation_step) {
-	bertierfd_t *p_fd = bertierfd_init();
 	p_fd->gamma = gamma;
 	p_fd->beta = beta;
 	p_fd->phi = phi;
 	p_fd->moderation_step = moderation_step;
 	return p_fd;
+}
+
+bertierfd_t* bertierfd_init(struct hashtable *params_table) {
+	return bertierfd_init_params(
+			parse_double(DEF_GAMMA, hashtable_search(params_table, "gamma")),
+			parse_double(DEF_BETA, hashtable_search(params_table, "beta")),
+			parse_double(DEF_PHI, hashtable_search(params_table, "phi")),
+			parse_long(DEF_MOD_STEP, hashtable_search(params_table, "moderationstep")));
+}
+
+bertierfd_t* bertierfd_init_def() {
+	return bertierfd_init_params(DEF_GAMMA, DEF_BETA, DEF_PHI, DEF_MOD_STEP);
 }

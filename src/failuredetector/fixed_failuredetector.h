@@ -19,6 +19,7 @@
 #ifndef FIXED_FAILUREDETECTOR_H_
 #define FIXED_FAILUREDETECTOR_H_
 
+#include "../hashtable/hashtable.h"
 #include "failuredetector.h"
 
 typedef struct {

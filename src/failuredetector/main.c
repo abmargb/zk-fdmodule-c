@@ -19,12 +19,13 @@
 #include "failuredetector.h"
 #include "fixed_failuredetector.h"
 #include "failuredetector_factory.h"
+#include "fd_hashtable.h"
 #include <time.h>
 #include <stdio.h>
 
 int main() {
 
-	fdetector_t* fd = create_failure_detector("bertier");
+	fdetector_t* fd = create_failure_detector("phiaccrual", create_fd_hashtable());
 
 	char* monitoredName = "object";
 
